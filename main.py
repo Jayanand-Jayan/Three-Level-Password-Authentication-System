@@ -14,4 +14,5 @@ async def root():
 
 @app.get("/{name}", response_class=HTMLResponse)
 async def read_name(request: Request, name: str):
-    return templates.TemplateResponse("home.html", {"request": request, "name": name}) 
+    return templates.TemplateResponse("home.html", {"request": request, "name": name})
+
