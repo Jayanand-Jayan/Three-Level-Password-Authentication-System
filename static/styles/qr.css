@@ -1,0 +1,105 @@
+@media only screen and (max-width: 600px) {
+    .flexContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .logo {
+        width: 60% !important;
+        padding-top: 20%;
+    }
+
+    @keyframes pop {
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .qr {
+        border-radius: 20px;
+        width: 50% !important;
+        margin: 10%;
+    }
+
+    .qr:hover {
+        box-shadow: 0 0 15px #4A171E;
+        animation: pop 0.65s linear 1;
+    }
+
+    p, h1 {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 100%;
+        font-weight: bolder;
+        font-variant: small-caps;
+        color: #4A171E;
+        margin: 20% 0;
+        text-align: center;
+    }
+
+}
+
+@media only screen and (min-width: 601px) {
+    .flexContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .logo {
+        width: 40% !important;
+    }
+
+    @keyframes pop {
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .qr {
+        border-radius: 20px;
+    }
+
+    .qr:hover {
+        box-shadow: 0 0 15px #4A171E;
+        animation: pop 0.65s linear 1;
+    }
+
+    p{
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 150%;
+        font-weight: bold;
+        font-variant: small-caps;
+        color: #935D08;
+        text-align: center;
+    }
+    
+    .heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .success {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 150%;
+        font-weight: bold;
+        font-variant: small-caps;
+        color: green;
+        text-align: center;
+    }
+
+    .failure {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 150%;
+        font-weight: bold;
+        font-variant: small-caps;
+        color: red;
+        text-align: center;
+    }
+
+}

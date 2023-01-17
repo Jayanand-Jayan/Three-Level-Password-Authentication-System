@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>TresSecura</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{{ url_for('static', path='/styles/qr.css') }}" rel="stylesheet">
+        <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='/images/favicon.ico') }}">
+    </head>
+
+    <body>
+        <div class="flexContainer">
+            <img src = "{{ url_for('static', path='/images/Logo.png') }}" alt="Logo" class="logo"/><br><br><br>
+            <p>Scan the below QR code using your mobile phone</p>
+            <img src = "{{ url_for('static', path='/images/qr.png') }}" alt="QR Code" class="qr"/>  
+        </div>
+    </body>
+</html>
