@@ -61,6 +61,8 @@
     }
 
     .qr {
+        border-color: #4A171E;
+        border-width: 10px;
         border-radius: 20px;
     }
 
@@ -84,6 +86,16 @@
         justify-content: center;
     }
 
+    .succImg {
+        width: 10%;
+        height: auto;
+    }
+
+    .failImg {
+        width: 50%;
+        height: auto;
+    }
+
     .success {
         font-family: Georgia, 'Times New Roman', Times, serif;
         font-size: 150%;
@@ -100,6 +112,10 @@
         font-variant: small-caps;
         color: red;
         text-align: center;
+    }
+
+    .verifyBtn {
+        background-color: aqua;
     }
 
 }

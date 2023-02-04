@@ -4,13 +4,123 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="{{ url_for('static', path='/styles/qr.css') }}" rel="stylesheet">
         <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='/images/favicon.ico') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     </head>
 
     <body>
-        <div class="flexContainer">
-            <img src = "{{ url_for('static', path='/images/Logo.png') }}" alt="Logo" class="logo"/><br><br><br>
-            <p>Scan the below QR code using your mobile phone</p>
-            <img src = "{{ url_for('static', path='/images/qr.png') }}" alt="QR Code" class="qr"/>  
+        <div class="flexContainer" id="mainContainer">
         </div>
+        <div id="hiddenStuff" style="visibility: hidden;">{{ totp }}</div>
+        <script>
+            var ws = new WebSocket("ws://172.20.0.154:8000/ws");
+            ws.onmessage = function(event) {
+                if (event.data == "Authenticated") {
+                    if (!(navigator.userAgent.match(/Android/i)
+                        || navigator.userAgent.match(/webOS/i)
+                        || navigator.userAgent.match(/iPhone/i)
+                        || navigator.userAgent.match(/iPad/i)
+                        || navigator.userAgent.match(/iPod/i)
+                        || navigator.userAgent.match(/BlackBerry/i)
+                        || navigator.userAgent.match(/Windows Phone/i))) {
+                            document.getElementById("mainContainer").innerHTML = "";
+                            const succImg = document.createElement("img");
+                            succImg.src = "{{ url_for('static', path='/images/Tick.gif') }}"
+                            succImg.setAttribute("class", succImg)
+                            document.getElementById("mainContainer").appendChild(succImg);
+                            const succMsg = document.createElement("h1");
+                            succMsg.setAttribute("class", "success");
+                            succMsg.innerHTML = "Successfully Authenticated!";
+                            document.getElementById("mainContainer").appendChild(succMsg);
+                        }
+                }
+                else {
+                    if (!(navigator.userAgent.match(/Android/i)
+                        || navigator.userAgent.match(/webOS/i)
+                        || navigator.userAgent.match(/iPhone/i)
+                        || navigator.userAgent.match(/iPad/i)
+                        || navigator.userAgent.match(/iPod/i)
+                        || navigator.userAgent.match(/BlackBerry/i)
+                        || navigator.userAgent.match(/Windows Phone/i))) {
+                            document.getElementById("mainContainer").innerHTML = "";
+                            const failImg = document.createElement("img");
+                            failImg.src = "{{ url_for('static', path='/images/Cross.gif') }}"
+                            failImg.setAttribute("class", failImg)
+                            document.getElementById("mainContainer").appendChild(failImg);
+                            const failMsg = document.createElement("h1");
+                            failMsg.setAttribute("class", "failure");
+                            failMsg.innerHTML = "Authentication Failed!";
+                            document.getElementById("mainContainer").appendChild(failMsg);
+                        }
+                }
+            }   
+            function waitForSocketConnection(socket, callback) {
+                setTimeout(
+                    function() {
+                        if (socket.readyState === WebSocket.OPEN) {
+                            console.log("Connection is made");
+                            if (callback != null) {
+                                callback();
+                            }
+                            else {
+                                console.log("Waiting for connection...");
+                                waitForSocketConnection(socket, callback);
+                            }
+                        }
+                    }, 100);
+            }
+            
+            
+            function handleClick() {
+                    waitForSocketConnection(ws, function() {
+                    var data = document.getElementById("hiddenStuff").innerHTML;
+                    ws.send(data)
+                    console.log("Message sent");
+                });    
+            }
+            if (navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)) {
+            const container = document.getElementById("mainContainer");
+            const plswait = document.createElement("h1");
+            plswait.setAttribute("class", "success");
+            plswait.innerHTML = "Please check your laptop screen for authentication status";
+            container.appendChild(plswait);
+            const verifyButton = document.createElement("button");
+            verifyButton.setAttribute("class", "verifyBtn");
+            verifyButton.onclick = handleClick;
+            verifyButton.innerHTML = "Verify"
+            container.appendChild(verifyButton);
+         }
+
+         else {
+            const container = document.getElementById("mainContainer");
+            const logoImg = document.createElement("img");
+            logoImg.src = "{{ url_for('static', path='/images/Logo.png') }}";
+            logoImg.alt = "TreSecura";
+            logoImg.setAttribute("class", "logo");
+            container.appendChild(logoImg);
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+            container.appendChild(document.createElement("br"));
+            const scanInstr = document.createElement("p");
+            scanInstr.innerHTML = "Scan the below QR code using your mobile phone";
+            container.appendChild(scanInstr);
+            const qrImg = document.createElement("div");
+            qrImg.setAttribute("id", "myqrcode");
+            qrImg.alt = "QR Code";
+            qrImg.setAttribute("class", "qr");
+            container.appendChild(qrImg);
+            var qrcode = new QRCode("myqrcode", {
+                text: "http://172.20.0.154:8000/display_qr",
+                colorLight: "#4A171E",
+                colorDark: "#FFFFFF",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+         }
+        </script>
     </body>
 </html>
