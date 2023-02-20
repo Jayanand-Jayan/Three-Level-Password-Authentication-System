@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>TreSecura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/styles/login.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='/images/favicon.ico') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <img class="logo" src="{{ url_for('static', path='/images/Logo.png') }}" alt="TreSecura">
+        <form class="login_form" action="/verify" method="POST">
+            <label for="uname">Username</label><br>
+            <input id="uname" name="username" type="text">
+            <label for="pass">Password</label><br>
+            <input id="pass" name="password" type="password">
+            <button class="log_butt">
+                Sign in
+            </button>
+            <a class="signup" href="">Sign up now!</a>
+        </form>
+    </div>
+</body>
+
+</html>
