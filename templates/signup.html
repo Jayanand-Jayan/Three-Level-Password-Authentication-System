@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <title>TreSecura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/styles/signup.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', path='/images/favicon.ico') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Poppins&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <img class="logo" src="{{ url_for('static', path='/images/Logo.png') }}" alt="TreSecura">
+        <form class="signup_form" action="/register" method="POST">
+            <label for="uname">Username<span style="color: red;">*</span></label><br>
+            <input id="uname" name="username" type="text" required>
+            <label for="pass">Password<span style="color: red;">*</span></label><br>
+            <input id="pass" name="password" type="password" required>
+            <label for="mail">Email ID<span style="color: red;">*</span></label><br>
+            <input id="mail" name="mail" type="email" required>
+            <label id="phno">Phone Number<span style="color: red;">*</span></label><br>
+            <input id="phno" name="phno" type="tel" required>
+            <button class="signup_butt">
+                Sign Up
+            </button>
+            <a class="signin" href="/login">Sign in instead</a>
+        </form>
+    </div>
+</body>
+
+</html>
